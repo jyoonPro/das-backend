@@ -3,9 +3,7 @@ import { Web3Service } from './web3.service';
 
 @Injectable()
 export class Web3Guard implements CanActivate {
-  constructor(
-    private readonly web3Service: Web3Service,
-  ) {}
+  constructor(private readonly web3Service: Web3Service) {}
 
   async canActivate(context: ExecutionContext) {
     const request = context.switchToHttp().getRequest();
@@ -18,6 +16,12 @@ export class Web3Guard implements CanActivate {
     }
 
     const signer = await this.web3Service.verifySignature(message, signature);
-    return signer === address;
+    if (signer === address) {
+      request.signer = address;
+      return true;
+    } else {
+      request.signer = null;
+      return false;
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
 import { DeveloperService } from './developer.service';
 import { AppCreateDto, AppUpdateDto } from './developer.dto';
 import { Web3Guard } from '../web3/web3.guard';
@@ -28,9 +28,9 @@ export class DeveloperController {
     return this.developerService.updateApp(uuid, dto);
   }
 
-  @Get('developer/:developer')
+  @Get('apps')
   @UseGuards(Web3Guard)
-  getApps(@Param('developer') developer: string) {
-    return this.developerService.getApps(developer);
+  getApps(@Req() req) {
+    return this.developerService.getApps(req.signer);
   }
 }
