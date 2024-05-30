@@ -39,4 +39,9 @@ export class DeveloperController {
   getApps(@Req() req) {
     return this.developerService.getApps(req.signer);
   }
+
+  @Get('store/apps')
+  getAppsStore(@Req() req) {
+    return this.developerService.getAppsStore();
+  }
 }

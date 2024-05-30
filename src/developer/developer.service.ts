@@ -33,6 +33,10 @@ export class DeveloperService {
     return this.appRepository.findBy({ developer });
   }
 
+  async getAppsStore() {
+    return this.appRepository.find();
+  }
+
   async deleteApp(uuid: string) {
     await this.appRepository.delete(uuid);
   }
