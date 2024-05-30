@@ -32,4 +32,8 @@ export class DeveloperService {
   async getApps(developer: string) {
     return this.appRepository.findBy({ developer });
   }
+
+  async deleteApp(uuid: string) {
+    await this.appRepository.delete(uuid);
+  }
 }
