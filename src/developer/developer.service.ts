@@ -12,12 +12,12 @@ export class DeveloperService {
     private readonly web3Service: Web3Service,
   ) {}
 
-  async createApp(dto: AppCreateDto) {
+  async createApp(developer: string, dto: AppCreateDto) {
     return this.appRepository.save({
       name: dto.name,
       description: dto.description,
-      developer: dto.developer,
-      metadata: "{}",
+      developer: developer,
+      metadata: dto.metadata,
     });
   }
 

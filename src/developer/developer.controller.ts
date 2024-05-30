@@ -9,8 +9,8 @@ export class DeveloperController {
 
   @Post('app/create')
   @UseGuards(Web3Guard)
-  createApp(@Body() dto: AppCreateDto) {
-    return this.developerService.createApp(dto);
+  createApp(@Req() req, @Body() dto: AppCreateDto) {
+    return this.developerService.createApp(req.signer, dto);
   }
 
   @Get('app/:uuid')

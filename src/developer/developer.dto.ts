@@ -1,7 +1,7 @@
 export class AppCreateDto {
   name: string;
   description: string;
-  developer: string;
+  metadata: string;
 }
 
 export class AppUpdateDto {
