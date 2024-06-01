@@ -19,6 +19,9 @@ export class App extends BaseEntity {
   @Column({ length: 42, nullable: false })
   developer: string; // Ethereum wallet address
 
+  @Column({ length: 42, nullable: true })
+  contract: string; // Ethereum contract address
+
   @Column({ type: 'text' })
   metadata: string;
 }

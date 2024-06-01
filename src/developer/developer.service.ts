@@ -38,6 +38,6 @@ export class DeveloperService {
   }
 
   async deleteApp(uuid: string) {
-    await this.appRepository.delete(uuid);
+    return this.appRepository.delete(uuid);
   }
 }

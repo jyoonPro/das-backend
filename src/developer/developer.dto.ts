@@ -8,4 +8,5 @@ export class AppUpdateDto {
   name?: string;
   description?: string;
   metadata?: string;
+  contract?: string;
 }
