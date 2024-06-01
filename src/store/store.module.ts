@@ -4,9 +4,10 @@ import { StoreService } from './store.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Web3Module } from '../web3/web3.module';
 import { DeveloperModule } from '../developer/developer.module';
+import { App } from '../developer/developer.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([]), Web3Module, DeveloperModule],
+  imports: [TypeOrmModule.forFeature([App]), Web3Module, DeveloperModule],
   controllers: [StoreController],
   providers: [StoreService],
   exports: [StoreService],
