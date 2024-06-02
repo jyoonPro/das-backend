@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post, Put, Delete, Req, UseGuards } from '@nestjs/common';
-import { StoreService } from './store.service';
+import { StoreService, ResellStoreService } from './store.service';
 import { LicenseCreateDto } from './store.dto';
 import { Web3Guard } from '../web3/web3.guard';
 
@@ -21,5 +21,15 @@ export class StoreController {
   @UseGuards(Web3Guard)
   createLicense(@Req() req, @Body() dto: LicenseCreateDto) {
     return this.storeService.createLicense(dto);
+  }
+}
+
+@Controller('resell-store')
+export class ResellStoreController {
+  constructor(private readonly storeService: ResellStoreService) {}
+
+  @Get('apps')
+  getApps() {
+    return this.storeService.getApps();
   }
 }

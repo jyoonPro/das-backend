@@ -3,7 +3,7 @@ import { IsNull, Not, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Web3Service } from '../web3/web3.service';
 import { App } from '../developer/developer.entity';
-import { StoreApp } from '../store/store.entity';
+import { ResellStoreApp, StoreApp } from '../store/store.entity';
 import { LicenseCreateDto } from './store.dto';
 
 @Injectable()
@@ -31,4 +31,12 @@ export class StoreService {
       isResell: dto.isResell,
     });
   }
+}
+
+@Injectable()
+export class ResellStoreService {
+  constructor(
+    @InjectRepository(ResellStoreApp) private readonly storeAppRepository: Repository<ResellStoreApp>,
+    private readonly web3Service: Web3Service,
+  ) {}
 }
