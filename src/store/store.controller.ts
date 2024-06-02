@@ -27,9 +27,4 @@ export class StoreController {
 @Controller('resell-store')
 export class ResellStoreController {
   constructor(private readonly storeService: ResellStoreService) {}
-
-  @Get('apps')
-  getApps() {
-    return this.storeService.getApps();
-  }
 }
