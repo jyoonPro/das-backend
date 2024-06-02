@@ -32,10 +32,10 @@ export class ResellStoreApp extends BaseEntity {
   uuid: string;
 
   @Column({ type: 'text', nullable: false })
-  user: string;
+  from: string;
 
   @Column({ type: 'text', nullable: false })
-  name: string;
+  to: string;
 
   @Column({ type: 'text', nullable: false })
   contract: string;
@@ -43,6 +43,6 @@ export class ResellStoreApp extends BaseEntity {
   @Column({ type: "text", nullable: false })
   tokenId: string;
 
-  @Column({ type: 'boolean' })
-  isResell: boolean;
+  @Column()
+  price: number;
 }

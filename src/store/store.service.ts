@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Web3Service } from '../web3/web3.service';
 import { App } from '../developer/developer.entity';
 import { ResellStoreApp, StoreApp } from '../store/store.entity';
-import { LicenseCreateDto } from './store.dto';
+import { LicenseCreateDto, LicenseUpdateDto, ResellCreateDto } from './store.dto';
 
 @Injectable()
 export class StoreService {
@@ -31,12 +31,30 @@ export class StoreService {
       isResell: dto.isResell,
     });
   }
+
+  async updateLicense(uuid: string, dto: LicenseCreateDto) {
+    return this.storeAppRepository.update({ uuid }, { ...dto });
+  }
 }
 
 @Injectable()
 export class ResellStoreService {
   constructor(
-    @InjectRepository(ResellStoreApp) private readonly storeAppRepository: Repository<ResellStoreApp>,
+    @InjectRepository(ResellStoreApp) private readonly resellStoreAppRepository: Repository<ResellStoreApp>,
     private readonly web3Service: Web3Service,
   ) {}
+
+  async createResell(dto: ResellCreateDto) {
+    return this.resellStoreAppRepository.save({
+      from: dto.from,
+      to: dto.to,
+      contract: dto.contract,
+      tokenId: dto.tokenId,
+      price: dto.price,
+    })
+  }
+
+  async getResell(to: string) {
+    return this.resellStoreAppRepository.findBy({ to });
+  }
 }
