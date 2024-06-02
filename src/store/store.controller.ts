@@ -12,6 +12,11 @@ export class StoreController {
     return this.storeService.getApps();
   }
 
+  @Get('licenses/:user')
+  getLicenses(@Param('user') user: string) {
+    return this.storeService.getLicenses(user);
+  }
+
   @Post('buy')
   @UseGuards(Web3Guard)
   createLicense(@Req() req, @Body() dto: LicenseCreateDto) {

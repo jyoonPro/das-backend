@@ -14,6 +14,9 @@ export class StoreApp extends BaseEntity {
   user: string;
 
   @Column({ type: 'text', nullable: false })
+  name: string;
+
+  @Column({ type: 'text', nullable: false })
   contract: string;
 
   @Column({ type: "text", nullable: false })

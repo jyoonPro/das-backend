@@ -17,10 +17,15 @@ export class StoreService {
   async getApps() {
     return this.appRepository.findBy({ contract: Not(IsNull()) });
   }
+
+  async getLicenses(user: string) {
+    return this.storeAppRepository.findBy({ user });
+  }
   
   async createLicense(dto: LicenseCreateDto) {
     return this.storeAppRepository.save({
       user: dto.user,
+      name: dto.name,
       contract: dto.contract,
       tokenId: dto.tokenId,
       isResell: dto.isResell,
