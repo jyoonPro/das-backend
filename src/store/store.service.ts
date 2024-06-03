@@ -21,7 +21,7 @@ export class StoreService {
   async getLicenses(user: string) {
     return this.storeAppRepository.findBy({ user });
   }
-  
+
   async createLicense(dto: LicenseCreateDto) {
     return this.storeAppRepository.save({
       user: dto.user,
@@ -40,6 +40,7 @@ export class StoreService {
 @Injectable()
 export class ResellStoreService {
   constructor(
+    @InjectRepository(StoreApp) private readonly storeAppRepository: Repository<StoreApp>,
     @InjectRepository(ResellStoreApp) private readonly resellStoreAppRepository: Repository<ResellStoreApp>,
     private readonly web3Service: Web3Service,
   ) {}
@@ -56,5 +57,24 @@ export class ResellStoreService {
 
   async getResell(to: string) {
     return this.resellStoreAppRepository.findBy({ to });
+  }
+
+  async acceptResell(uuid: string) {
+    const resellInfo = await this.resellStoreAppRepository.findOneBy({ uuid });
+    if (!resellInfo) {
+      throw new BadRequestException('Resell not found');
+    }
+
+    const storeApp = await this.storeAppRepository.findOneBy({ contract: resellInfo.contract, tokenId: resellInfo.tokenId });
+    if (!storeApp) {
+      throw new BadRequestException('License not found');
+    }
+
+    await this.storeAppRepository.update(
+      { uuid: storeApp.uuid },
+      { user: resellInfo.to, isResell: false },
+    );
+
+    return this.resellStoreAppRepository.delete({ uuid });
   }
 }

@@ -44,4 +44,9 @@ export class ResellStoreController {
   getResell(@Param('to') to: string) {
     return this.resellStoreService.getResell(to);
   }
+
+  @Delete('buy/:uuid')
+  acceptResell(@Req() req, @Param('uuid') uuid: string) {
+    return this.resellStoreService.acceptResell(uuid);
+  }
 }

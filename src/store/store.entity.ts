@@ -19,7 +19,7 @@ export class StoreApp extends BaseEntity {
   @Column({ type: 'text', nullable: false })
   contract: string;
 
-  @Column({ type: "text", nullable: false })
+  @Column({ type: 'text', nullable: false })
   tokenId: string;
 
   @Column({ type: 'boolean' })
@@ -40,9 +40,9 @@ export class ResellStoreApp extends BaseEntity {
   @Column({ type: 'text', nullable: false })
   contract: string;
 
-  @Column({ type: "text", nullable: false })
+  @Column({ type: 'text', nullable: false })
   tokenId: string;
 
-  @Column()
+  @Column({ type: 'real' })
   price: number;
 }
